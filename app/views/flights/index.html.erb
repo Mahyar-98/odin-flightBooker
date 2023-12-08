@@ -1,0 +1,11 @@
+<%= form_with model: @flight, method: "GET" do |f| %>
+    <%= f.label :query, "Look for flights: " %>
+    <%= f.text_field :query %>
+    <%= f.label :departure_airport_id, "Where are you flying from? " %>
+    <%= f.select(:departure_airport_id, @airport_options) %>
+    <%= f.label :arrival_airport_id, "Where are you flying to? " %>
+    <%= f.select(:arrival_airport_id, @airport_options) %>
+    <%= f.label :flight_date, "When do you wanna fly? " %>
+    <%= f.select(:flight_date, @date_options) %>
+    <%= f.submit "Search" %>
+<% end %>
