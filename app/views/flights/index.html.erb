@@ -16,10 +16,14 @@
 
 <section>
     <h2> Available flights: </h2>
-    <% @flights.each do |flight| %>
-        <%= "#{Airport.find(flight.departure_airport_id).city} to 
-            #{Airport.find(flight.arrival_airport_id).city} on
-            #{flight.date}" %>
-            <br>
+    <%= form_with url: "/bookings/new", method: "GET" do |f| %>
+        <%= f.label :chosen_flight, "Choose a flight: " %> <br>
+        <% @flights.each do |flight| %>
+            <%= f.radio_button :chosen_flight, flight.id %>
+            <%= "#{Airport.find(flight.departure_airport_id).city} to 
+                #{Airport.find(flight.arrival_airport_id).city} on
+                #{flight.date}" %> <br>
+        <% end %>
+        <%= f.submit "Book" %>
     <% end %>
 </section>
