@@ -1,11 +1,25 @@
-<%= form_with model: @flight, method: "GET" do |f| %>
-    <%= f.label :query, "Look for flights: " %>
-    <%= f.text_field :query %>
-    <%= f.label :departure_airport_id, "Where are you flying from? " %>
-    <%= f.select(:departure_airport_id, @airport_options) %>
-    <%= f.label :arrival_airport_id, "Where are you flying to? " %>
-    <%= f.select(:arrival_airport_id, @airport_options) %>
-    <%= f.label :flight_date, "When do you wanna fly? " %>
-    <%= f.select(:flight_date, @date_options) %>
-    <%= f.submit "Search" %>
-<% end %>
+<section>
+    <h2> Look for flights: </h2>
+    <%= form_with model: @flight, method: "GET" do |f| %>
+        <%= f.label :departure_airport_id, "Where are you flying from? " %>
+        <%= f.select(:departure_airport_id, @airport_options, { include_blank: true }) %>
+        <br>
+        <%= f.label :arrival_airport_id, "Where are you flying to? " %>
+        <%= f.select(:arrival_airport_id, @airport_options, { include_blank: true }) %>
+        <br>
+        <%= f.label :flight_date, "When do you wanna fly? " %>
+        <%= f.select(:flight_date, @date_options, { include_blank: true }) %>
+        <br>
+        <%= f.submit "Search" %>
+    <% end %>
+</section>
+
+<section>
+    <h2> Available flights: </h2>
+    <% @flights.each do |flight| %>
+        <%= "#{Airport.find(flight.departure_airport_id).city} to 
+            #{Airport.find(flight.arrival_airport_id).city} on
+            #{flight.date}" %>
+            <br>
+    <% end %>
+</section>
