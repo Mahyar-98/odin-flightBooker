@@ -16,7 +16,7 @@
 
 <section>
     <h2> Available flights: </h2>
-    <%= form_with url: "/bookings/new", method: "GET" do |f| %>
+    <%= form_with model: @flight, url: new_booking_path, method: "GET" do |f| %>
         <%= f.label :chosen_flight, "Choose a flight: " %> <br>
         <% @flights.each do |flight| %>
             <%= f.radio_button :chosen_flight, flight.id %>
@@ -24,6 +24,8 @@
                 #{Airport.find(flight.arrival_airport_id).city} on
                 #{flight.date}" %> <br>
         <% end %>
+        <%= f.label :number_of_passengers, "Please enter the number of passengers: " %>
+        <%= f.number_field :number_of_passengers %>
         <%= f.submit "Book" %>
     <% end %>
 </section>

@@ -1,0 +1,9 @@
+<h1>Your ticket:</h1>
+<%= params %>
+<%= @booking.passengers %>
+<h2>Passenger: </h2>
+<% @booking.passengers.each do |passenger| %>
+    <% puts "The passengers name is: #{passenger.name}" %>
+<% end %>
+<h2>Flight: </h2>
+<%= @booking.flight %>
